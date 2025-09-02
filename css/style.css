@@ -1,25 +1,26 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
   background: #f8f9fa;
 }
 
 header {
   background: #0077b6;
   color: white;
-  padding: 10px 20px;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+header h1 {
+  margin: 0;
+}
+
 nav ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
-  gap: 15px;
+  gap: 1rem;
 }
 
 nav a {
@@ -28,16 +29,9 @@ nav a {
   font-weight: bold;
 }
 
-nav a:hover {
-  text-decoration: underline;
-}
-
-main {
-  padding: 20px;
-}
-
 .page {
   display: none;
+  padding: 2rem;
 }
 
 .page.active {
@@ -47,10 +41,9 @@ main {
 #sosButton {
   background: red;
   color: white;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 10px 20px;
+  font-size: 1.2rem;
   border: none;
+  padding: 1rem 2rem;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -60,9 +53,7 @@ main {
 }
 
 #map {
-  margin-top: 20px;
-  width: 100%;
-  height: 300px;
+  height: 400px;
+  margin-top: 1rem;
   border: 2px solid #0077b6;
-  border-radius: 8px;
 }

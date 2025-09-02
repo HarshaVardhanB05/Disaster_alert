@@ -5,71 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abhaya – Disaster Management</title>
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  (function(){
-    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
-  })();
-</script>
-
-
 <body>
   <header>
-    <div class="logo">🌍 Abhaya</div>
+    <h1>🌍 Abhaya</h1>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Alerts</a>
-      <a href="#">Guidelines</a>
-      <a href="#">Contacts</a>
-      <a href="#">Shelters</a>
-      <a href="#">News</a>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('alerts')">Alerts</a></li>
+        <li><a href="#" onclick="showPage('guidelines')">Guidelines</a></li>
+        <li><a href="#" onclick="showPage('contacts')">Contacts</a></li>
+        <li><a href="#" onclick="showPage('shelters')">Shelters</a></li>
+        <li><a href="#" onclick="showPage('news')">News</a></li>
+      </ul>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <h1>Abhaya – Disaster Management</h1>
-      <p>Stay safe with real-time alerts, emergency contacts, and shelters.</p>
-      <button class="sos-btn">🚨 SOS</button>
+    <!-- Home -->
+    <section id="home" class="page active">
+      <h2>Welcome to Abhaya</h2>
+      <p>Stay safe with real-time disaster alerts, emergency contacts, and nearby shelters.</p>
+      <button id="sosButton">🚨 SOS (Send WhatsApp)</button>
     </section>
 
-    <!-- Map Section -->
-    <section class="map-section">
-      <h2>📍 Your Location & Nearby Shelters</h2>
+    <!-- Alerts -->
+    <section id="alerts" class="page">
+      <h2>Live Alerts</h2>
+      <div id="alertsList">Loading alerts...</div>
+    </section>
+
+    <!-- Guidelines -->
+    <section id="guidelines" class="page">
+      <h2>Safety Guidelines</h2>
+      <ul>
+        <li>⚡ Earthquake: Drop, Cover, Hold.</li>
+        <li>🌊 Flood: Move to higher ground immediately.</li>
+        <li>🔥 Fire: Use nearest exit, avoid lifts.</li>
+      </ul>
+    </section>
+
+    <!-- Contacts -->
+    <section id="contacts" class="page">
+      <h2>Emergency Contacts</h2>
+      <ul>
+        <li>🚑 Ambulance – 108</li>
+        <li>🚒 Fire – 101</li>
+        <li>👮 Police – 100</li>
+        <li>📞 Disaster Helpline – 1078</li>
+      </ul>
+    </section>
+
+    <!-- Shelters -->
+    <section id="shelters" class="page">
+      <h2>Nearby Shelters</h2>
       <div id="map"></div>
     </section>
 
-    <section class="alerts">
-      <h2>Recent Alerts</h2>
-      <div class="alert">
-        <h3>🌋 Earthquake – M0.46</h3>
-        <p>5 km NNW of The Geysers, CA</p>
-        <p><small>9/2/2025, 1:12:50 PM</small></p>
-        <a href="#">More Info</a>
-      </div>
-
-      <div class="alert">
-        <h3>🌋 Earthquake – M0.9</h3>
-        <p>19 km NW of Parkfield, CA</p>
-        <p><small>9/2/2025, 12:57:25 PM</small></p>
-        <a href="#">More Info</a>
-      </div>
+    <!-- News -->
+    <section id="news" class="page">
+      <h2>Latest Disaster News</h2>
+      <div id="newsList">Fetching news...</div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Abhaya Disaster Management | Stay Safe</p>
-  </footer>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <!-- Custom JS -->
   <script src="js/app.js"></script>
 </body>
 </html>
