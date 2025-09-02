@@ -1,24 +1,24 @@
-import contacts from "../data/contacts.json" assert { type: "json" };
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("data/contacts.json")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.querySelector("#contacts-container");
+      container.innerHTML = "";
 
-function renderContacts(filter = "") {
-  const list = document.getElementById("contacts");
-  list.innerHTML = "";
-  contacts
-    .filter(c => c.name.toLowerCase().includes(filter.toLowerCase()))
-    .forEach(contact => {
-      const div = document.createElement("div");
-      div.className = "bg-white p-4 rounded-lg shadow flex justify-between items-center";
-      div.innerHTML = `
-        <div>
-          <h3 class="font-bold text-lg text-teal-600">${contact.name}</h3>
-          <p class="text-gray-600">${contact.number}</p>
-        </div>
-        <a href="tel:${contact.number}" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-full">
-          <i class="fas fa-phone"></i>
-        </a>
-      `;
-      list.appendChild(div);
-    });
-}
+      const list = document.createElement("ul");
+      list.classList.add("contact-list");
 
-window.addEventListener("load", () => renderContacts());
+      data.forEach(contact => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <strong>${contact.name}</strong> (${contact.role}) <br>
+          <a href="tel:${contact.phone}">📱 ${contact.phone}</a><br>
+          <a href="mailto:${contact.email}">✉️ ${contact.email}</a>
+        `;
+        list.appendChild(li);
+      });
+
+      container.appendChild(list);
+    })
+    .catch(err => console.error("Error loading contacts:", err));
+});
