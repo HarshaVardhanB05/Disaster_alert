@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Kattankulathur Govt. School Shelter",
+    "location": "Kattankulathur, Tamil Nadu",
+    "status": "Open: Yes",
+    "capacity": "Capacity: 200",
+    "resources": "Food, Medical Available"
+  },
+  {
+    "name": "Community Hall, Potheri",
+    "location": "Potheri, Tamil Nadu",
+    "status": "Open: Yes",
+    "capacity": "Capacity: 150",
+    "resources": "Food Available"
+  }
+]
