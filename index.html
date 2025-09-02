@@ -4,73 +4,76 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abhaya – Disaster Management</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Leaflet Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-  <header>
-    <h1>🌍 Abhaya</h1>
-    <nav>
-      <ul>
-        <li><a href="#" onclick="showPage('home')">Home</a></li>
-        <li><a href="#" onclick="showPage('alerts')">Alerts</a></li>
-        <li><a href="#" onclick="showPage('guidelines')">Guidelines</a></li>
-        <li><a href="#" onclick="showPage('contacts')">Contacts</a></li>
-        <li><a href="#" onclick="showPage('shelters')">Shelters</a></li>
-        <li><a href="#" onclick="showPage('news')">News</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">🌍 Abhaya</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#alerts">Alerts</a></li>
+      <li><a href="#guidelines">Guidelines</a></li>
+      <li><a href="#contacts">Contacts</a></li>
+      <li><a href="#shelters">Shelters</a></li>
+      <li><a href="#news">News</a></li>
+    </ul>
+  </nav>
 
-  <main>
-    <!-- Home -->
-    <section id="home" class="page active">
-      <h2>Welcome to Abhaya</h2>
-      <p>Stay safe with real-time disaster alerts, emergency contacts, and nearby shelters.</p>
-      <button id="sosButton">🚨 SOS (Send WhatsApp)</button>
-    </section>
-
-    <!-- Alerts -->
-    <section id="alerts" class="page">
-      <h2>Live Alerts</h2>
-      <div id="alertsList">Loading alerts...</div>
-    </section>
-
-    <!-- Guidelines -->
-    <section id="guidelines" class="page">
-      <h2>Safety Guidelines</h2>
-      <ul>
-        <li>⚡ Earthquake: Drop, Cover, Hold.</li>
-        <li>🌊 Flood: Move to higher ground immediately.</li>
-        <li>🔥 Fire: Use nearest exit, avoid lifts.</li>
-      </ul>
-    </section>
-
-    <!-- Contacts -->
-    <section id="contacts" class="page">
-      <h2>Emergency Contacts</h2>
-      <ul>
-        <li>🚑 Ambulance – 108</li>
-        <li>🚒 Fire – 101</li>
-        <li>👮 Police – 100</li>
-        <li>📞 Disaster Helpline – 1078</li>
-      </ul>
-    </section>
-
-    <!-- Shelters -->
-    <section id="shelters" class="page">
-      <h2>Nearby Shelters</h2>
-      <div id="map"></div>
-    </section>
-
-    <!-- News -->
-    <section id="news" class="page">
-      <h2>Latest Disaster News</h2>
-      <div id="newsList">Fetching news...</div>
+  <!-- Home -->
+  <main id="home">
+    <section class="hero">
+      <h1>Abhaya – Disaster Management</h1>
+      <p>Stay safe with real-time alerts, emergency contacts, and shelters.</p>
+      <button id="sos-btn">🚨 SOS</button>
     </section>
   </main>
 
-  <script src="js/app.js"></script>
+  <!-- Alerts -->
+  <section id="alerts">
+    <h2>🚨 Disaster Alerts</h2>
+    <div id="alerts-container">Loading alerts...</div>
+  </section>
+
+  <!-- Guidelines -->
+  <section id="guidelines">
+    <h2>📖 Safety Guidelines</h2>
+    <ul>
+      <li>Keep emergency contacts handy.</li>
+      <li>Prepare a first aid kit.</li>
+      <li>Stay calm and follow official updates.</li>
+      <li>Move to safe shelters if needed.</li>
+    </ul>
+  </section>
+
+  <!-- Contacts -->
+  <section id="contacts">
+    <h2>📞 Emergency Contacts</h2>
+    <div id="contacts-container">Loading contacts...</div>
+  </section>
+
+  <!-- Shelters -->
+  <section id="shelters">
+    <h2>🏠 Nearby Shelters</h2>
+    <div id="map"></div>
+    <ul id="shelter-list"></ul>
+  </section>
+
+  <!-- News -->
+  <section id="news">
+    <h2>📰 Disaster News</h2>
+    <p>Latest disaster-related news will appear here.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Abhaya – Disaster Management</p>
+  </footer>
+
+  <script src="js/alerts.js"></script>
+  <script src="js/contacts.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

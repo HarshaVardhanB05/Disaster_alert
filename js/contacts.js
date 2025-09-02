@@ -1,21 +1,24 @@
-// SOS button → Direct WhatsApp
-document.getElementById("sosButton").addEventListener("click", () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("data/contacts.json")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.querySelector("#contacts-container");
+      container.innerHTML = "";
 
-      const message = encodeURIComponent(
-        `🚨 SOS! I need help. My location: https://www.google.com/maps?q=${lat},${lon}`
-      );
+      const list = document.createElement("ul");
+      list.classList.add("contact-list");
 
-      // Option 1: Let user choose contact
-      window.open(`https://wa.me/?text=${message}`, "_blank");
+      data.forEach(contact => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <strong>${contact.name}</strong> (${contact.role}) <br>
+          <a href="tel:${contact.phone}">📱 ${contact.phone}</a><br>
+          <a href="mailto:${contact.email}">✉️ ${contact.email}</a>
+        `;
+        list.appendChild(li);
+      });
 
-      // Option 2: Send directly to one number
-      // window.open(`https://wa.me/91XXXXXXXXXX?text=${message}`, "_blank`);
-    });
-  } else {
-    alert("Geolocation not supported!");
-  }
+      container.appendChild(list);
+    })
+    .catch(err => console.error("Error loading contacts:", err));
 });
