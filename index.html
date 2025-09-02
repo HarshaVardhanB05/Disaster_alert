@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abhaya – Disaster Management</title>
-  <link rel="stylesheet" href="css/style.css">
-  <!-- Leaflet Maps -->
+  <!-- ✅ Fixed CSS path -->
+  <link rel="stylesheet" href="style.css">
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-  <!-- Navigation -->
+  
   <nav class="navbar">
     <div class="logo">🌍 Abhaya</div>
     <ul>
@@ -23,22 +24,21 @@
     </ul>
   </nav>
 
-  <!-- Home -->
   <main id="home">
     <section class="hero">
       <h1>Abhaya – Disaster Management</h1>
       <p>Stay safe with real-time alerts, emergency contacts, and shelters.</p>
-      <button id="sos-btn">🚨 SOS</button>
+      <!-- ✅ Changed to class="sos-btn" so CSS applies -->
+      <button class="sos-btn" id="sos-btn">🚨 SOS</button>
     </section>
   </main>
 
-  <!-- Alerts -->
   <section id="alerts">
     <h2>🚨 Disaster Alerts</h2>
     <div id="alerts-container">Loading alerts...</div>
   </section>
 
-  <!-- Guidelines -->
+
   <section id="guidelines">
     <h2>📖 Safety Guidelines</h2>
     <ul>
@@ -49,20 +49,17 @@
     </ul>
   </section>
 
-  <!-- Contacts -->
   <section id="contacts">
     <h2>📞 Emergency Contacts</h2>
     <div id="contacts-container">Loading contacts...</div>
   </section>
 
-  <!-- Shelters -->
   <section id="shelters">
     <h2>🏠 Nearby Shelters</h2>
     <div id="map"></div>
     <ul id="shelter-list"></ul>
   </section>
 
-  <!-- News -->
   <section id="news">
     <h2>📰 Disaster News</h2>
     <p>Latest disaster-related news will appear here.</p>

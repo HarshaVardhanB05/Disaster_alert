@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const mapContainer = document.querySelector("#map");
   const shelterList = document.querySelector("#shelter-list");
 
-  // SOS Button
   sosBtn.addEventListener("click", () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
@@ -11,8 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const lon = pos.coords.longitude;
 
         alert(`🚨 SOS Triggered!\nLocation: ${lat}, ${lon}`);
-
-        // Open WhatsApp with location
+    //!whatsapp navigation
         const message = `🚨 SOS! I need help. My location: https://maps.google.com/?q=${lat},${lon}`;
         window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
 
@@ -24,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Show Location on Map + Nearby Shelters
+  //! Show Location on Map + Nearby Shelters
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(pos => {
       const lat = pos.coords.latitude;
@@ -32,15 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const map = L.map(mapContainer).setView([lat, lon], 13);
 
-      // Add tiles
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors"
       }).addTo(map);
 
-      // Mark user location
       L.marker([lat, lon]).addTo(map).bindPopup("📍 You are here").openPopup();
 
-      // Sample shelter data (can later integrate with real API)
       const shelters = [
         { name: "City Hall Shelter", lat: lat + 0.01, lon: lon + 0.01 },
         { name: "Community Center", lat: lat - 0.01, lon: lon - 0.01 },
