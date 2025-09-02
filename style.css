@@ -1,12 +1,20 @@
-/* Import modern font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* Global styles */
+/* Color Scheme */
+:root {
+  --primary: #1d3557;
+  --secondary: #457b9d;
+  --accent: #e63946;
+  --background: #f1faee;
+  --card-bg: #ffffff;
+}
+
+/* Global */
 body {
   font-family: 'Inter', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4f6f9;
+  background: var(--background);
   color: #222;
   line-height: 1.6;
 }
@@ -14,16 +22,12 @@ body {
 h1, h2 {
   margin-bottom: 0.5rem;
   font-weight: 700;
-  color: #023e8a;
-}
-
-p {
-  margin-top: 0;
+  color: var(--primary);
 }
 
 /* Navbar */
 .navbar {
-  background: #023e8a;
+  background: var(--primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,6 +35,7 @@ p {
   position: sticky;
   top: 0;
   z-index: 1000;
+  gap: 10px;
 }
 
 .navbar .logo {
@@ -54,14 +59,43 @@ p {
 }
 
 .navbar ul li a:hover {
-  text-decoration: underline;
+  color: var(--accent);
+}
+
+/* Search bar */
+.search-bar {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 0.9rem;
+  transition: box-shadow 0.2s;
+}
+
+.search-bar:focus {
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
+
+/* Language button */
+.lang-btn {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.lang-btn:hover {
+  background: var(--accent);
 }
 
 /* Hero */
 .hero {
   text-align: center;
   padding: 4rem 1rem;
-  background: linear-gradient(to right, #0077b6, #00b4d8);
+  background: linear-gradient(to right, var(--primary), var(--secondary));
   color: white;
   border-radius: 0 0 20px 20px;
   margin-bottom: 2rem;
@@ -79,7 +113,7 @@ p {
 
 /* SOS Button */
 button.sos-btn {
-  background: #d90429;
+  background: var(--accent);
   color: white;
   padding: 14px 28px;
   border: none;
@@ -92,22 +126,18 @@ button.sos-btn {
 }
 
 button.sos-btn:hover {
-  background: #9a031e;
+  background: #b5171f;
   transform: translateY(-2px);
 }
 
-/* Sections */
-section {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* Dashboard Grid (desktop) */
+/* Dashboard Grid */
 .dashboard {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
 }
 
 @media (max-width: 900px) {
@@ -118,7 +148,7 @@ section {
 
 /* Cards */
 .card {
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -132,7 +162,7 @@ section {
 
 /* Alerts */
 .alert-card {
-  border-left: 5px solid #d90429;
+  border-left: 5px solid var(--accent);
   margin-bottom: 1rem;
   padding: 1rem;
 }
@@ -148,7 +178,7 @@ section {
   margin: 0.5rem 0;
   padding: 1rem;
   border-radius: 8px;
-  border-left: 4px solid #00b4d8;
+  border-left: 4px solid var(--secondary);
 }
 
 /* Map */
@@ -161,10 +191,80 @@ section {
 
 /* Footer */
 footer {
-  background: #023e8a;
+  background: var(--primary);
   color: white;
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
-  border-top: 4px solid #0077b6;
+  border-top: 4px solid var(--secondary);
+}
+
+
+/* Default (Light Mode) */
+:root {
+  --primary: #1d3557;
+  --secondary: #457b9d;
+  --accent: #e63946;
+  --background: #f1faee;
+  --card-bg: #ffffff;
+  --text-color: #222;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  --primary: #0b132b;
+  --secondary: #1c2541;
+  --accent: #ef476f;
+  --background: #121212;
+  --card-bg: #1e1e1e;
+  --text-color: #f1f1f1;
+}
+
+/* Apply variables */
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1, h2 {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Dark Mode Button */
+.dark-btn {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-left: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dark-btn:hover {
+  background: var(--accent);
+}
+
+/* Adjust cards & nav */
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.navbar {
+  background: var(--primary);
+}
+
+footer {
+  background: var(--primary);
 }
