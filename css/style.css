@@ -1,34 +1,123 @@
-#sos-btn {
-  margin-top: 1rem;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  color: white;
-  background: #dc2626;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-#sos-btn:hover {
-  transform: scale(1.1);
-  background: #b91c1c;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Map */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fa;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: #0077b6;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #e0f7fa;
+  border-bottom: 2px solid #ddd;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.sos-btn {
+  background: red;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sos-btn:hover {
+  background: darkred;
+}
+
+/* Alerts */
+.alerts {
+  padding: 2rem;
+}
+
+.alerts h2 {
+  margin-bottom: 1rem;
+}
+
+.alert {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.alert h3 {
+  margin-bottom: 0.5rem;
+  color: #d62828;
+}
+
+.alert a {
+  color: #0077b6;
+  text-decoration: none;
+}
+
+.alert a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #0077b6;
+  color: white;
+  margin-top: 2rem;
+}
+
+/* Map Section */
+.map-section {
+  padding: 2rem;
+  text-align: center;
+}
+
 #map {
-  height: 300px;
+  height: 400px;
   width: 100%;
   border-radius: 10px;
-  margin: 1rem 0;
-}
-#shelter-list {
-  list-style: none;
-  padding: 0;
-}
-#shelter-list li {
-  background: #fff;
-  margin: 0.5rem 0;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }

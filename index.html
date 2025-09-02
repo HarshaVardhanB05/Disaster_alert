@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abhaya – Disaster Management</title>
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
   <header>
@@ -24,6 +27,12 @@
       <h1>Abhaya – Disaster Management</h1>
       <p>Stay safe with real-time alerts, emergency contacts, and shelters.</p>
       <button class="sos-btn">🚨 SOS</button>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+      <h2>📍 Your Location & Nearby Shelters</h2>
+      <div id="map"></div>
     </section>
 
     <section class="alerts">
@@ -47,5 +56,11 @@
   <footer>
     <p>© 2025 Abhaya Disaster Management | Stay Safe</p>
   </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Custom JS -->
+  <script src="js/app.js"></script>
 </body>
 </html>
