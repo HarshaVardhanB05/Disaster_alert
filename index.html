@@ -4,76 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abhaya – Disaster Management</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <!-- Leaflet Maps -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
+  <header>
     <div class="logo">🌍 Abhaya</div>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#alerts">Alerts</a></li>
-      <li><a href="#guidelines">Guidelines</a></li>
-      <li><a href="#contacts">Contacts</a></li>
-      <li><a href="#shelters">Shelters</a></li>
-      <li><a href="#news">News</a></li>
-    </ul>
-  </nav>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Alerts</a>
+      <a href="#">Guidelines</a>
+      <a href="#">Contacts</a>
+      <a href="#">Shelters</a>
+      <a href="#">News</a>
+    </nav>
+  </header>
 
-  <!-- Home -->
-  <main id="home">
+  <main>
     <section class="hero">
       <h1>Abhaya – Disaster Management</h1>
       <p>Stay safe with real-time alerts, emergency contacts, and shelters.</p>
-      <button id="sos-btn">🚨 SOS</button>
+      <button class="sos-btn">🚨 SOS</button>
+    </section>
+
+    <section class="alerts">
+      <h2>Recent Alerts</h2>
+      <div class="alert">
+        <h3>🌋 Earthquake – M0.46</h3>
+        <p>5 km NNW of The Geysers, CA</p>
+        <p><small>9/2/2025, 1:12:50 PM</small></p>
+        <a href="#">More Info</a>
+      </div>
+
+      <div class="alert">
+        <h3>🌋 Earthquake – M0.9</h3>
+        <p>19 km NW of Parkfield, CA</p>
+        <p><small>9/2/2025, 12:57:25 PM</small></p>
+        <a href="#">More Info</a>
+      </div>
     </section>
   </main>
 
-  <!-- Alerts -->
-  <section id="alerts">
-    <h2>🚨 Disaster Alerts</h2>
-    <div id="alerts-container">Loading alerts...</div>
-  </section>
-
-  <!-- Guidelines -->
-  <section id="guidelines">
-    <h2>📖 Safety Guidelines</h2>
-    <ul>
-      <li>Keep emergency contacts handy.</li>
-      <li>Prepare a first aid kit.</li>
-      <li>Stay calm and follow official updates.</li>
-      <li>Move to safe shelters if needed.</li>
-    </ul>
-  </section>
-
-  <!-- Contacts -->
-  <section id="contacts">
-    <h2>📞 Emergency Contacts</h2>
-    <div id="contacts-container">Loading contacts...</div>
-  </section>
-
-  <!-- Shelters -->
-  <section id="shelters">
-    <h2>🏠 Nearby Shelters</h2>
-    <div id="map"></div>
-    <ul id="shelter-list"></ul>
-  </section>
-
-  <!-- News -->
-  <section id="news">
-    <h2>📰 Disaster News</h2>
-    <p>Latest disaster-related news will appear here.</p>
-  </section>
-
   <footer>
-    <p>© 2025 Abhaya – Disaster Management</p>
+    <p>© 2025 Abhaya Disaster Management | Stay Safe</p>
   </footer>
-
-  <script src="js/alerts.js"></script>
-  <script src="js/contacts.js"></script>
-  <script src="js/main.js"></script>
 </body>
 </html>
