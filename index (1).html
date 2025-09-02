@@ -1,328 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhaya - Your Disaster Companion</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        :root {
-            --primary-blue: #1E40AF;
-            --danger-red: #DC2626;
-        }
-        .active-nav {
-            border-bottom: 2px solid var(--primary-blue); 
-            color: var(--primary-blue);
-            font-weight: 600;
-        }
-        .nav-item {
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-        .sos-button {
-            background-color: var(--danger-red);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-        }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhaya – Disaster Management</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
-<body class="bg-gray-50 text-gray-800">
 
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-shield-alt text-blue-700 text-2xl mr-2"></i> 
-                <h1 class="text-xl font-bold text-gray-800" data-lang-en="Abhaya" data-lang-ta="அபயா">Abhaya</h1>
-            </div>
-            <div class="relative">
-                <button id="language-toggle" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-full transition duration-300"> 
-                    <i class="fas fa-language mr-1"></i> <span id="lang-text">தமிழ்</span>
-                </button>
-            </div>
-        </div>
-    </header>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+  })();
+</script>
 
-    <main class="container mx-auto p-4 md:p-6">
-        
-        <nav class="bg-white rounded-lg shadow p-2 mb-6">
-            <ul class="flex justify-between sm:justify-around text-xs sm:text-sm md:text-base overflow-x-auto whitespace-nowrap no-scrollbar">
-                <li class="flex-1 text-center nav-item active-nav" onclick="showSection('home')"><a class="p-2 inline-block" href="#home"><i class="fas fa-home mr-1"></i> <span data-lang-en="Home" data-lang-ta="முகப்பு">Home</span></a></li>
-                <li class="flex-1 text-center nav-item" onclick="showSection('alerts')"><a class="p-2 inline-block" href="#alerts"><i class="fas fa-triangle-exclamation mr-1"></i> <span data-lang-en="Alerts" data-lang-ta="எச்சரிக்கைகள்">Alerts</span></a></li>
-                <li class="flex-1 text-center nav-item" onclick="showSection('forecast')"><a class="p-2 inline-block" href="#forecast"><i class="fas fa-cloud-sun-rain mr-1"></i> <span data-lang-en="Forecast" data-lang-ta="முன்னறிவிப்பு">Forecast</span></a></li>
-                <li class="flex-1 text-center nav-item" onclick="showSection('guidelines')"><a class="p-2 inline-block" href="#guidelines"><i class="fas fa-book-open mr-1"></i> <span data-lang-en="Guidelines" data-lang-ta="வழிகாட்டுதல்கள்">Guidelines</span></a></li>
-                <li class="flex-1 text-center nav-item" onclick="showSection('contacts')"><a class="p-2 inline-block" href="#contacts"><i class="fas fa-address-book mr-1"></i> <span data-lang-en="Contacts" data-lang-ta="தொடர்புகள்">Contacts</span></a></li>
-                <li class="flex-1 text-center nav-item" onclick="showSection('shelters')"><a class="p-2 inline-block" href="#shelters"><i class="fas fa-house-chimney-medical mr-1"></i> <span data-lang-en="Shelters" data-lang-ta="முகாம்கள்">Shelters</span></a></li>
-                <li class="flex-1 text-center nav-item" onclick="showSection('news')"><a class="p-2 inline-block" href="#news"><i class="fas fa-newspaper mr-1"></i> <span data-lang-en="News" data-lang-ta="செய்திகள்">News</span></a></li>
-            </ul>
-        </nav>
 
-        <div id="content-sections">
-             <section id="home" class="space-y-4">
-                <div class="bg-white p-6 rounded-lg shadow text-center">
-                    <h2 class="text-xl md:text-2xl font-bold mb-2 text-blue-800" data-lang-en="Welcome to Abhaya" data-lang-ta="அபயாவுக்கு வரவேற்கிறோம்">Welcome to Abhaya</h2>
-                    <p class="text-gray-600" data-lang-en="Your trusted companion in times of emergency. Stay safe and informed." data-lang-ta="அவசர காலங்களில் உங்கள் நம்பகமான துணை. பாதுகாப்பாகவும் தகவலறிந்தவராகவும் இருங்கள்.">Your trusted companion in times of emergency. Stay safe and informed.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow flex flex-col items-center justify-center">
-                     <h3 class="font-bold text-base md:text-lg mb-4 text-center" data-lang-en="In case of emergency, press the button below" data-lang-ta="அவசர காலங்களில், கீழே உள்ள பொத்தானை அழுத்தவும்">In case of emergency, press the button below</h3>
-                    <button id="sos-button" class="sos-button w-32 h-32 text-white rounded-full flex items-center justify-center text-4xl font-bold shadow-lg hover:bg-red-700 transition">SOS</button>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="font-bold text-lg mb-2 text-blue-700" data-lang-en="Current Location" data-lang-ta="தற்போதைய இடம்">Current Location</h3> 
-                    <p>Kattankulathur, Tamil Nadu, India</p>
-                </div>
-            </section>
-            <section id="alerts" class="hidden space-y-4"></section>
-            <section id="forecast" class="hidden"></section>
-            <section id="guidelines" class="hidden space-y-4">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="font-bold text-lg mb-2 text-blue-700" data-lang-en="Earthquake" data-lang-ta="நிலநடுக்கம்">Earthquake</h3> 
-                    <p data-lang-en="Drop, Cover, and Hold On. Stay indoors until the shaking stops." data-lang-ta="விழு, மூடு, பிடித்துக்கொள். நடுக்கம் நிற்கும் வரை வீட்டிற்குள்ளேயே இருங்கள்.">Drop, Cover, and Hold On. Stay indoors until the shaking stops.</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="font-bold text-lg mb-2 text-blue-700" data-lang-en="Flood" data-lang-ta="வெள்ளம்">Flood</h3> 
-                    <p data-lang-en="Move to higher ground immediately. Avoid walking or driving through floodwaters." data-lang-ta="உடனடியாக உயரமான இடத்திற்கு செல்லவும். வெள்ள நீரில் நடப்பதையோ, வாகனம் ஓட்டுவதையோ தவிர்க்கவும்.">Move to higher ground immediately. Avoid walking or driving through floodwaters.</p>
-                </div>
-                 <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="font-bold text-lg mb-2 text-blue-700" data-lang-en="Cyclone" data-lang-ta="புயல்">Cyclone</h3> 
-                    <p data-lang-en="Stay indoors, away from windows. Listen to official weather updates." data-lang-ta="வீட்டிற்குள்ளேயே ஜன்னல்களிலிருந்து தள்ளி இருக்கவும். அதிகாரப்பூர்வ வானிலை அறிவிப்புகளைக் கேளுங்கள்.">Stay indoors, away from windows. Listen to official weather updates.</p>
-                </div>
-            </section>
-            <section id="contacts" class="hidden">
-                 <div class="mb-4"><input type="text" id="contact-search" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search contacts..." data-lang-placeholder-en="Search contacts..." data-lang-placeholder-ta="தொடர்புகளைத் தேடு..."></div>
-                <div id="contact-list" class="space-y-4"></div>
-            </section>
-            <section id="shelters" class="hidden">
-                 <div class="mb-4"><input type="text" id="shelter-search" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search shelters..." data-lang-placeholder-en="Search shelters..." data-lang-placeholder-ta="முகாம்களைத் தேடு..."></div>
-                <div id="shelter-list" class="space-y-4"></div>
-            </section>
-            <section id="news" class="hidden space-y-4"></section>
-        </div>
-    </main>
-    
-    <div id="sos-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md text-center">
-            <i class="fas fa-triangle-exclamation text-red-500 text-5xl mb-4"></i>
-            <h2 class="text-xl font-bold mb-2" data-lang-en="Confirm SOS Alert" data-lang-ta="SOS எச்சரிக்கையை உறுதிப்படுத்தவும்">Confirm SOS Alert</h2>
-            <p class="text-gray-600 mb-6" data-lang-en="This will send your current location to emergency services. Use only in a real emergency." data-lang-ta="இது உங்கள் தற்போதைய இருப்பிடத்தை அவசர சேவைகளுக்கு அனுப்பும். உண்மையான அவசரத்தில் மட்டுமே பயன்படுத்தவும்.">This will send your current location to emergency services. Use only in a real emergency.</p>
-            <div class="flex justify-center gap-4">
-                <button id="cancel-sos" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-6 rounded-lg transition-colors" data-lang-en="Cancel" data-lang-ta="ரத்துசெய்">Cancel</button>
-                <button id="confirm-sos" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition-colors" data-lang-en="Confirm Alert" data-lang-ta="எச்சரிக்கையை உறுதிப்படுத்து">Confirm Alert</button>
-            </div>
-        </div>
-    </div>
+<body>
+  <header>
+    <div class="logo">🌍 Abhaya</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Alerts</a>
+      <a href="#">Guidelines</a>
+      <a href="#">Contacts</a>
+      <a href="#">Shelters</a>
+      <a href="#">News</a>
+    </nav>
+  </header>
 
-    <div id="alert-sent" class="hidden fixed top-5 left-1/2 -translate-x-1/2 w-11/12 max-w-sm bg-green-600 text-white p-4 rounded-lg shadow-lg z-50 text-center"> 
-        <p><i class="fas fa-check-circle mr-2"></i><span data-lang-en="Alert Sent!" data-lang-ta="எச்சரிக்கை அனுப்பப்பட்டது!">Alert Sent!</span></p>
-    </div>
+  <main>
+    <section class="hero">
+      <h1>Abhaya – Disaster Management</h1>
+      <p>Stay safe with real-time alerts, emergency contacts, and shelters.</p>
+      <button class="sos-btn">🚨 SOS</button>
+    </section>
 
-    <script>
-        const sections = ['home', 'alerts', 'forecast', 'guidelines', 'contacts', 'shelters', 'news'];
-        const navItems = document.querySelectorAll('.nav-item');
-        let currentLanguage = 'en';
+    <!-- Map Section -->
+    <section class="map-section">
+      <h2>📍 Your Location & Nearby Shelters</h2>
+      <div id="map"></div>
+    </section>
 
-        // --- IN-MEMORY DATA STORE (REVERTED TO STATIC) ---
-        const alertsData = [
-            { id: 1, severity: 'danger', title: 'Severe Cyclone Warning', message: 'A severe cyclone is expected to make landfall in the next 12 hours. Please evacuate coastal areas.' },
-            { id: 2, severity: 'warning', title: 'Heavy Rainfall Alert', message: 'Heavy rainfall predicted for the next 48 hours. Risk of urban flooding.' }
-        ];
-        const newsData = [
-            { id: 1, source: 'PIB India', timestamp: '2 Sep 2025, 12:00 PM', title: 'Precautionary Measures for Tamil Nadu Coastal Areas', content: 'NDRF teams have been deployed. Fishermen are advised not to venture into the sea.' },
-            { id: 2, source: 'TN GOV', timestamp: '2 Sep 2025, 11:30 AM', title: 'Relief centers established in Kattankulathur', content: 'Schools and community halls converted to temporary shelters. Food and water available.' }
-        ];
-        const contactsData = [
-            { id: 1, name: 'National Disaster Helpline', number: '1077' },
-            { id: 2, name: 'Police Control Room', number: '100' },
-            { id: 3, name: 'Fire & Rescue', number: '101' },
-            { id: 4, name: 'Ambulance Service', number: '108' },
-            { id: 5, name: 'SRM Hospital, Kattankulathur', number: '044-2745-2270' }
-        ];
-        const sheltersData = [
-            { id: 1, name: 'Kattankulathur Govt. School Shelter', location: 'Kattankulathur, Tamil Nadu', status: 'Open: Yes', capacity: 'Capacity: 200', resources: 'Food, Medical Available' },
-            { id: 2, name: 'Community Hall, Potheri', location: 'Potheri, Tamil Nadu', status: 'Open: Yes', capacity: 'Capacity: 150', resources: 'Food Available' }
-        ];
+    <section class="alerts">
+      <h2>Recent Alerts</h2>
+      <div class="alert">
+        <h3>🌋 Earthquake – M0.46</h3>
+        <p>5 km NNW of The Geysers, CA</p>
+        <p><small>9/2/2025, 1:12:50 PM</small></p>
+        <a href="#">More Info</a>
+      </div>
 
-        function generateForecast() {
-            const today = new Date();
-            const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1);
-            const dayAfter = new Date(today);
-            dayAfter.setDate(today.getDate() + 2);
-            const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            return [
-                { day: 'Today', date: formatDate(today), temp: '31°C / 26°C', condition: 'Heavy Rain Likely', icon: 'fas fa-cloud-showers-heavy', color: 'border-amber-500' },
-                { day: 'Tomorrow', date: formatDate(tomorrow), temp: '32°C / 27°C', condition: 'Scattered Showers', icon: 'fas fa-cloud-sun-rain', color: 'border-yellow-400' },
-                { day: 'Day After', date: formatDate(dayAfter), temp: '33°C / 27°C', condition: 'Partly Cloudy', icon: 'fas fa-cloud-sun', color: 'border-blue-700' }
-            ];
-        }
+      <div class="alert">
+        <h3>🌋 Earthquake – M0.9</h3>
+        <p>19 km NW of Parkfield, CA</p>
+        <p><small>9/2/2025, 12:57:25 PM</small></p>
+        <a href="#">More Info</a>
+      </div>
+    </section>
+  </main>
 
-        const translations = {
-            'Severe Cyclone Warning': { en: 'Severe Cyclone Warning', ta: 'கடும் புயல் எச்சரிக்கை' },
-            'A severe cyclone is expected to make landfall in the next 12 hours. Please evacuate coastal areas.': { en: 'A severe cyclone is expected to make landfall in the next 12 hours. Please evacuate coastal areas.', ta: 'அடுத்த 12 மணி நேரத்தில் கடும் புயல் கரையை கடக்க வாய்ப்புள்ளது. கடலோரப் பகுதிகளை விட்டு வெளியேறவும்.'},
-            'Heavy Rainfall Alert': { en: 'Heavy Rainfall Alert', ta: 'கனமழை எச்சரிக்கை' },
-            'Heavy rainfall predicted for the next 48 hours. Risk of urban flooding.': { en: 'Heavy rainfall predicted for the next 48 hours. Risk of urban flooding.', ta: 'அடுத்த 48 மணி நேரத்திற்கு கனமழை பெய்ய வாய்ப்புள்ளது. நகர்ப்புறங்களில் வெள்ளப்பெருக்கு ஏற்படும் அபாயம்.'},
-            'Today': { en: 'Today', ta: 'இன்று' }, 'Tomorrow': { en: 'Tomorrow', ta: 'நாளை' }, 'Day After': { en: 'Day After', ta: 'அடுத்த நாள்' },
-            'Heavy Rain Likely': { en: 'Heavy Rain Likely', ta: 'கனமழைக்கு வாய்ப்பு' }, 'Scattered Showers': { en: 'Scattered Showers', ta: 'மிதமான மழைக்கு வாய்ப்பு' }, 'Partly Cloudy': { en: 'Partly Cloudy', ta: 'வானம் மேகமூட்டத்துடன் காணப்படும்' },
-            'Precautionary Measures for Tamil Nadu Coastal Areas': { en: 'Precautionary Measures for Tamil Nadu Coastal Areas', ta: 'தமிழ்நாடு கடலோரப் பகுதிகளுக்கான முன்னெச்சரிக்கை நடவடிக்கைகள்' },
-            'NDRF teams have been deployed. Fishermen are advised not to venture into the sea.': { en: 'NDRF teams have been deployed. Fishermen are advised not to venture into the sea.', ta: 'தேசிய பேரிடர் மீட்புப் படைகள் பணியில் ஈடுபடுத்தப்பட்டுள்ளன. மீனவர்கள் கடலுக்குச் செல்ல வேண்டாம் என அறிவுறுத்தப்படுகிறார்கள்.' },
-            'Relief centers established in Kattankulathur': { en: 'Relief centers established in Kattankulathur', ta: 'காட்டங்குளத்தூரில் நிவாரண மையங்கள் அமைக்கப்பட்டுள்ளன' },
-            'Schools and community halls converted to temporary shelters. Food and water available.': { en: 'Schools and community halls converted to temporary shelters. Food and water available.', ta: 'பள்ளிகள் மற்றும் சமுதாயக் கூடங்கள் தற்காலிக முகாம்களாக மாற்றப்பட்டுள்ளன. உணவு மற்றும் குடிநீர் வசதி செய்யப்பட்டுள்ளது.' },
-            'National Disaster Helpline': { en: 'National Disaster Helpline', ta: 'தேசிய பேரிடர் உதவி எண்' }, 'Police Control Room': { en: 'Police Control Room', ta: 'காவல் கட்டுப்பாட்டு அறை' }, 'Fire & Rescue': { en: 'Fire & Rescue', ta: 'தீயணைப்பு மற்றும் மீட்பு' }, 'Ambulance Service': { en: 'Ambulance Service', ta: 'ஆம்புலன்ஸ் சேவை' }, 'SRM Hospital, Kattankulathur': { en: 'SRM Hospital, Kattankulathur', ta: 'எஸ்ஆர்எம் மருத்துவமனை, காட்டாங்குளத்தூர்' },
-            'Kattankulathur Govt. School Shelter': { en: 'Kattankulathur Govt. School Shelter', ta: 'காட்டாங்குளத்தூர் அரசுப் பள்ளி முகாம்' }, 'Community Hall, Potheri': { en: 'Community Hall, Potheri', ta: 'சமுதாயக் கூடம், பொத்தேரி' },
-            'Open: Yes': { en: 'Open: Yes', ta: 'திறந்துள்ளது: ஆம்' },
-            'Capacity: 200': { en: 'Capacity: 200', ta: 'கொள்ளளவு: 200' }, 'Capacity: 150': { en: 'Capacity: 150', ta: 'கொள்ளளவு: 150' },
-            'Food, Medical Available': { en: 'Food, Medical Available', ta: 'உணவு, மருத்துவம் உள்ளது' }, 'Food Available': { en: 'Food Available', ta: 'உணவு உள்ளது' },
-        };
-        
-        // --- DYNAMIC RENDERING ---
-        const getTranslation = (key) => translations[key]?.[currentLanguage] || key;
+  <footer>
+    <p>© 2025 Abhaya Disaster Management | Stay Safe</p>
+  </footer>
 
-        function renderAlerts() {
-            const container = document.getElementById('alerts');
-            container.innerHTML = alertsData.map(alert => {
-                const colors = alert.severity === 'danger'
-                    ? 'bg-red-100 border-red-500 text-red-800'
-                    : 'bg-amber-100 border-amber-500 text-amber-800';
-                return `<div class="${colors} border-l-4 p-4 rounded-lg shadow" role="alert">
-                    <p class="font-bold">${getTranslation(alert.title)}</p>
-                    <p>${getTranslation(alert.message)}</p>
-                </div>`;
-            }).join('');
-        }
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-        function renderForecast() {
-            const container = document.getElementById('forecast');
-            const data = generateForecast();
-            container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-3 gap-4">${data.map(day => `
-                <div class="bg-white p-4 rounded-lg shadow text-center border-t-4 ${day.color}">
-                    <h3 class="font-bold text-lg">${getTranslation(day.day)} <span class="text-sm text-gray-500">(${day.date})</span></h3>
-                    <i class="${day.icon} text-5xl text-blue-500 my-3"></i>
-                    <p class="text-2xl font-bold">${day.temp}</p>
-                    <p class="text-gray-600 mt-2">${getTranslation(day.condition)}</p>
-                </div>`).join('')}</div>`;
-        }
-
-        function renderContacts(filter = '') {
-            const container = document.getElementById('contact-list');
-            const filteredData = contactsData.filter(c => 
-                getTranslation(c.name).toLowerCase().includes(filter.toLowerCase()) || c.number.includes(filter)
-            );
-
-            if (filteredData.length === 0) {
-                 container.innerHTML = `<p class="text-gray-500">No contacts found.</p>`;
-                 return;
-            }
-
-            container.innerHTML = filteredData.map(contact => `
-                <div class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
-                    <div>
-                        <h3 class="font-bold text-lg text-blue-700">${getTranslation(contact.name)}</h3> 
-                        <p class="text-gray-600">${contact.number}</p>
-                    </div>
-                    <a href="tel:${contact.number}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full transition-colors"> 
-                        <i class="fas fa-phone"></i>
-                    </a>
-                </div>`).join('');
-        }
-
-        function renderShelters(filter = '') {
-            const container = document.getElementById('shelter-list');
-            const filteredData = sheltersData.filter(s => 
-                getTranslation(s.name).toLowerCase().includes(filter.toLowerCase()) || 
-                s.location.toLowerCase().includes(filter.toLowerCase())
-            );
-
-             if (filteredData.length === 0) {
-                 container.innerHTML = `<p class="text-gray-500">No shelters found.</p>`;
-                 return;
-            }
-
-            container.innerHTML = filteredData.map(shelter => `
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="font-bold text-lg text-blue-700">${getTranslation(shelter.name)}</h3> 
-                    <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>${shelter.location}</p>
-                    <div class="flex flex-wrap gap-x-4 gap-y-2 mt-2 text-sm">
-                        <span class="text-green-600 font-semibold"><i class="fas fa-door-open mr-1"></i> ${getTranslation(shelter.status)}</span>
-                        <span><i class="fas fa-users mr-1"></i> ${getTranslation(shelter.capacity)}</span>
-                    </div>
-                    <p class="mt-2 text-sm text-blue-600 font-semibold"><i class="fas fa-hands-holding-child mr-1"></i> ${getTranslation(shelter.resources)}</p> 
-                </div>`).join('');
-        }
-
-        function renderNews() {
-            const container = document.getElementById('news');
-            container.innerHTML = newsData.map(article => `
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <p class="text-sm text-gray-500">Source: ${article.source} | ${article.timestamp}</p>
-                    <h3 class="font-bold text-lg my-1 text-blue-800">${getTranslation(article.title)}</h3>
-                    <p>${getTranslation(article.content)}</p>
-                </div>`).join('');
-        }
-
-        // --- UI & EVENT HANDLING ---
-        function showSection(sectionId) {
-            sections.forEach(id => document.getElementById(id).classList.add('hidden'));
-            document.getElementById(sectionId).classList.remove('hidden');
-            navItems.forEach(item => {
-                item.classList.remove('active-nav');
-                if (item.getAttribute('onclick').includes(sectionId)) {
-                    item.classList.add('active-nav');
-                }
-            });
-        }
-        
-        function updateAllText() {
-            document.querySelectorAll('[data-lang-en]').forEach(el => {
-                el.innerText = currentLanguage === 'en' ? el.getAttribute('data-lang-en') : el.getAttribute('data-lang-ta');
-            });
-            document.querySelectorAll('[data-lang-placeholder-en]').forEach(el => {
-                el.placeholder = currentLanguage === 'en' ? el.getAttribute('data-lang-placeholder-en') : el.getAttribute('data-lang-placeholder-ta');
-            });
-
-            renderAlerts();
-            renderForecast();
-            renderContacts(document.getElementById('contact-search').value);
-            renderShelters(document.getElementById('shelter-search').value);
-            renderNews();
-        }
-
-        document.getElementById('language-toggle').addEventListener('click', () => {
-            currentLanguage = currentLanguage === 'en' ? 'ta' : 'en';
-            document.getElementById('lang-text').innerText = currentLanguage === 'en' ? 'English' : 'தமிழ்';
-            updateAllText();
-        });
-
-        document.getElementById('contact-search').addEventListener('input', (e) => renderContacts(e.target.value));
-        document.getElementById('shelter-search').addEventListener('input', (e) => renderShelters(e.target.value));
-
-        const sosModal = document.getElementById('sos-modal');
-        const alertSentDiv = document.getElementById('alert-sent');
-        document.getElementById('sos-button').addEventListener('click', () => sosModal.classList.remove('hidden'));
-        document.getElementById('cancel-sos').addEventListener('click', () => sosModal.classList.add('hidden'));
-        sosModal.addEventListener('click', (e) => { if (e.target === sosModal) sosModal.classList.add('hidden'); });
-        document.getElementById('confirm-sos').addEventListener('click', () => {
-            sosModal.classList.add('hidden');
-            alertSentDiv.classList.remove('hidden');
-            setTimeout(() => alertSentDiv.classList.add('hidden'), 3000);
-        });
-
-        // --- INITIALIZATION ---
-        window.onload = () => {
-            updateAllText();
-        };
-
-    </script>
+  <!-- Custom JS -->
+  <script src="js/app.js"></script>
 </body>
 </html>
-
